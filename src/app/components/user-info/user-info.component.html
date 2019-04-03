@@ -1,0 +1,147 @@
+<div class="container mb-3">
+  <p-toolbar>
+    <div class="ui-toolbar-group-left">
+      <button
+        pButton
+        type="button"
+        routerLink="/"
+        label="Back"
+        icon="pi pi-arrow-left"
+      ></button>
+      <button
+        pButton
+        type="button"
+        label="Edit"
+        icon="pi pi-pencil"
+        class="ui-button-warning ml-3"
+        (click)="onClickEdit()"
+      >
+        {{ isEdit ? "Is" : "" }}
+      </button>
+    </div>
+  </p-toolbar>
+</div>
+
+<div class="container">
+  <form #editUserForm="ngForm" (ngSubmit)="onFormSubmit(editUserForm)">
+    <div class="form-group">
+      <label
+        >id:
+        <input
+          type="number"
+          [ngModel]="user?.id"
+          (ngModelChange)="user.id = $event"
+          name="id"
+          [readOnly]="true"
+          required
+        />
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label
+        >Name*:
+        <input
+          type="text"
+          [ngModel]="user?.name"
+          (ngModelChange)="user.name = $event"
+          name="name"
+          #name="ngModel"
+          minlength="3"
+          maxlength="30"
+          [readOnly]="!isEdit"
+          required
+        />
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label
+        >Username*:
+        <input
+          type="text"
+          [ngModel]="user?.username"
+          #username="ngModel"
+          (ngModelChange)="user.username = $event"
+          name="username"
+          minlength="3"
+          maxlength="30"
+          [readOnly]="!isEdit"
+          required
+        />
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label
+        >email*:
+        <input
+          type="email"
+          [ngModel]="user?.email"
+          (ngModelChange)="user.email = $event"
+          name="email"
+          #email="ngModel"
+          [readOnly]="!isEdit"
+          required
+          email
+        />
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label
+        >phone*:
+        <input
+          type="tel"
+          [ngModel]="user?.phone"
+          (ngModelChange)="user.phone = $event"
+          name="phone"
+          #phone="ngModel"
+          minlength="3"
+          maxlength="30"
+          [readOnly]="!isEdit"
+          required
+        />
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label
+        >website:
+        <input
+          type="url"
+          [ngModel]="user?.website"
+          (ngModelChange)="user.website = $event"
+          name="website"
+          [readOnly]="!isEdit"
+        />
+      </label>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="name.invalid && name.dirty">
+      Заполните поле Name!
+    </div>
+
+    <div class="alert alert-danger" *ngIf="username.invalid && username.dirty">
+      Заполните поле Username!
+    </div>
+
+    <div class="alert alert-danger" *ngIf="email.invalid && email.dirty">
+      Заполните поле Email!
+    </div>
+
+    <div class="alert alert-danger" *ngIf="phone.invalid && phone.dirty">
+      Заполните поле Phone!
+    </div>
+
+    <button
+      pButton
+      type="submit"
+      label="Submit"
+      icon="pi pi-check-circle"
+      iconPos="left"
+      class="ui-button-success"
+      [disabled]="!isEdit || editUserForm.invalid"
+    ></button>
+  </form>
+</div>
