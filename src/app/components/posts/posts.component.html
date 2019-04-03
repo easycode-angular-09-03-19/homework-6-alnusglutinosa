@@ -1,0 +1,29 @@
+<div class="container mb-3">
+    <p-toolbar>
+      <div class="ui-toolbar-group-left">
+        <button
+          pButton
+          type="button"
+          routerLink="/"
+          label="Back"
+          icon="pi pi-arrow-left"
+        ></button>
+      </div>
+    </p-toolbar>
+  </div>
+
+<div class="container mt-2 mb-4">
+  <div class="row">
+    <h1>User posts</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <ng-container *ngFor="let post of posts">
+      <div class="col col-12">
+        <app-post [post]="post"></app-post>
+      </div>
+    </ng-container>
+  </div>
+</div>
